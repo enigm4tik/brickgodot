@@ -10,6 +10,7 @@ const VELOCITY_LIMIT = 40
 @export var lives = 3
 @export var death_zone: DeathZone
 @export var ui: UI 
+@export var points = 0
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
@@ -18,6 +19,8 @@ var start_position: Vector2
 
 func _ready():
 	ui.set_lives(lives)
+	ui.set_level()
+	ui.set_points()
 	start_position = position
 	death_zone.life_lost.connect(on_life_lost)
 	

@@ -2,9 +2,10 @@ extends RigidBody2D
 
 class_name Brick
 
-signal brick_destroyed
+signal brick_destroyed(initial_level)
 
 var level = 1 
+var initial_level = 1
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
@@ -19,8 +20,11 @@ var sprites: Array[Texture2D] = [
 ]
 
 func get_size():
-	return collision_shape_2d.shape.get_rect().size 
+	return collision_shape_2d.shape.get_rect().size 	
 	
+func set_initial_level(level: int):
+	set_level(level)
+	initial_level = level
 
 func set_level(new_level: int):
 	level = new_level
@@ -40,7 +44,7 @@ func fade_out():
 	
 func destroy():
 	queue_free()
-	brick_destroyed.emit()
+	brick_destroyed.emit(initial_level)
 	
 func get_width():
 	return get_size().x

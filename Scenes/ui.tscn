@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmxqdxl6sl5hq"]
+[gd_scene load_steps=5 format=3 uid="uid://bmxqdxl6sl5hq"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_rhd3y"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xudkg"]
+bg_color = Color(0.154876, 0.154876, 0.154876, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_puj8e"]
+bg_color = Color(0.233427, 0.688192, 0.572844, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60bar"]
-bg_color = Color(0, 0.461515, 0.333625, 1)
+bg_color = Color(0.691144, 0.655632, 0.385774, 1)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_rhd3y")
@@ -21,6 +27,20 @@ theme_override_constants/margin_bottom = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 400
+alignment = 1
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "LEVEL 1"
+
+[node name="PointsLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+text = "Points: 0"
 
 [node name="LivesLabel" type="Label" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -40,7 +60,7 @@ grow_vertical = 2
 [node name="Panel" type="Panel" parent="GameOverContainer"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_60bar")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xudkg")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOverContainer/Panel"]
 layout_mode = 1
@@ -52,15 +72,16 @@ offset_top = -29.0
 offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 30
 
 [node name="Label" type="Label" parent="GameOverContainer/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "YOU HAVE LOST"
+text = "YOU LOST :("
 
 [node name="RestartButton" type="Button" parent="GameOverContainer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "RESTART GAME"
+text = "TRY AGAIN!"
 
 [node name="LevelUpContainer" type="CenterContainer" parent="."]
 unique_name_in_owner = true
@@ -74,7 +95,7 @@ grow_vertical = 2
 [node name="Panel" type="Panel" parent="LevelUpContainer"]
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_60bar")
+theme_override_styles/panel = SubResource("StyleBoxFlat_puj8e")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelUpContainer/Panel"]
 layout_mode = 1
@@ -86,6 +107,7 @@ offset_top = -29.0
 offset_bottom = 29.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 30
 
 [node name="Label" type="Label" parent="LevelUpContainer/Panel/VBoxContainer"]
 layout_mode = 2
@@ -94,7 +116,43 @@ text = "LEVEL UP"
 
 [node name="LevelUpButton" type="Button" parent="LevelUpContainer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "START NEXT LEVEL"
+text = "NEXT LEVEL"
+
+[node name="GameWonContainer" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GameWonContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_60bar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameWonContainer/Panel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -29.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="GameWonContainer/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "YOU WON THE GAME!"
+
+[node name="RestartButton" type="Button" parent="GameWonContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "RESTART"
 
 [connection signal="pressed" from="GameOverContainer/Panel/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="LevelUpContainer/Panel/VBoxContainer/LevelUpButton" to="." method="_on_level_up_button_pressed"]
+[connection signal="pressed" from="GameWonContainer/Panel/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]

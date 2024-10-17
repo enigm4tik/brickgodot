@@ -49,4 +49,5 @@ position = Vector2(0, -245)
 [node name="BrickSpawner" type="Node" parent="." node_paths=PackedStringArray("spawn_start")]
 script = ExtResource("6_p0tr0")
 brick_scene = ExtResource("7_1t0sq")
+margin = null
 spawn_start = NodePath("../Marker2D")

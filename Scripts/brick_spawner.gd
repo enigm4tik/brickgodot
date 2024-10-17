@@ -36,7 +36,7 @@ func spawn_from_definition(level_definition: Array):
 				continue
 			var brick = brick_scene.instantiate() as Brick
 			add_child(brick)
-			brick.set_level(level_definition[i][j])
+			brick.set_initial_level(level_definition[i][j])
 			var x = spawn_position_x + j * (margin.x + brick.get_size().x)
 			var y = spawn_position_y + i * (margin.y + brick.get_size().y)
 			brick.set_position(Vector2(x, y))
@@ -44,7 +44,11 @@ func spawn_from_definition(level_definition: Array):
 			brick_count += 1
 	
 
-func on_brick_destroyed():
+func on_brick_destroyed(level):
+	# update ui with points based on level, the higher the more 
+	# lest just say x * 10
+	LevelDefinitions.current_points += level * 10
+	ui.set_points()
 	brick_count -= 1
 	if brick_count == 0:
 		ball.reset_ball()

@@ -42,6 +42,7 @@ func _input(_event):
 		ball.start_ball()
 		is_ball_started = true
 
+
 func on_ball_lost():
 	is_ball_started = false
 	direction = Vector2.ZERO
