@@ -34,7 +34,7 @@ func game_over() -> void:
 func _on_restart_button_pressed() -> void:
 	LevelDefinitions.current_level = 1
 	LevelDefinitions.current_points = 0
-	LevelDefinitions.extra_lives = 0
+	LevelDefinitions.current_lives = 3
 	get_tree().reload_current_scene()
 
 
