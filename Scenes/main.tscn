@@ -20,7 +20,7 @@ collision_layer = 2
 camera = NodePath("../Camera2D")
 
 [node name="Ball" parent="." node_paths=PackedStringArray("death_zone", "ui") instance=ExtResource("2_4la5s")]
-position = Vector2(0, 152)
+position = Vector2(0, 124)
 death_zone = NodePath("../DeathZone")
 ui = NodePath("../UI")
 
@@ -49,5 +49,4 @@ position = Vector2(0, -245)
 [node name="BrickSpawner" type="Node" parent="." node_paths=PackedStringArray("spawn_start")]
 script = ExtResource("6_p0tr0")
 brick_scene = ExtResource("7_1t0sq")
-margin = null
 spawn_start = NodePath("../Marker2D")
